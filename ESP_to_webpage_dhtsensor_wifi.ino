@@ -7,7 +7,7 @@ const char* password = "12345678";
 
 WebServer server(80);
 
-// Initialize the DHT11 sensor on Pin 4
+
 DHT11 dht11(4); 
 
 String webpage = R"rawliteral(
@@ -53,25 +53,25 @@ String webpage = R"rawliteral(
 </html>
 )rawliteral";
 
-void handleRoot()//handleroot is for sending html code to webpage
+void handleRoot()
 {
     server.send(200, "text/html", webpage);
 }
 
 void handleSensor()
 {
-    // Read temperature and humidity as integers (DHT11 returns whole numbers)
+    
     int temperature = dht11.readTemperature();
     int humidity = dht11.readHumidity();
 
-    // Check if the sensor returned an error code
+    
     if (temperature == DHT11::ERROR_TIMEOUT || temperature == DHT11::ERROR_CHECKSUM ||
         humidity == DHT11::ERROR_TIMEOUT || humidity == DHT11::ERROR_CHECKSUM) {
         server.send(200, "text/plain", "Failed to read sensor");
         return;
     }
 
-    // Combine readings into a single simple string
+    
     String reading = "Temp: " + String(temperature) + " C | Humidity: " + String(humidity) + "%";
     server.send(200, "text/plain", reading);
 }
@@ -80,7 +80,7 @@ void setup()
 {
     Serial.begin(115200);
 
-    // Start Wi-Fi Access Point
+    
     WiFi.softAP(ssid, password);
     Serial.print("IP adress:");
     Serial.println(WiFi.softAPIP());
@@ -92,5 +92,5 @@ void setup()
 
 void loop()
 {
-    server.handleClient();//handleclient is for starting the html code which is sent
+    server.handleClient();
 }
