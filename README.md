@@ -38,6 +38,7 @@ An IoT project built using the **ESP32** and **DHT11 sensor** that creates a Wi-
 
 ![Circuit](images/circuit_wiring.jpg)
 
+
 ---
 
 ## 🌐 Web Interface
